@@ -5,17 +5,8 @@ import urllib.parse
 import datetime
 from urllib.parse import urlparse
 from dotenv import load_dotenv
-from general_functions import *  
-
-
-def parse_im(url, script_path, im_path):
-    create_dir(script_path, im_path)
-    image_name = "hubble.jpg"
-    response = requests.get(url)
-    response.raise_for_status
-    with open(f"{script_path}/{im_path}/{image_name}", "wb") as saved_im:
-        saved_im.write(response.content)
-    return
+from general_functions import * 
+from dload_img_by_url import * 
 
 
 def fetch_spacex_last_launch(script_path, im_path):
@@ -91,7 +82,7 @@ def main():
     script_path = pathlib.Path.cwd()
     url = input("Введите ссылку для скачивания: ")
     im_path = input("Введите название директории, куда необходимо скачать файл: ")
-    parse_im(url, script_path, im_path)
+    download_img(url, script_path, im_path)
     fetch_spacex_last_launch(script_path, im_path)
     parse_EPIC(nasa_api_token, script_path, im_path)
     parse_nasa(nasa_api_token, script_path, im_path)
