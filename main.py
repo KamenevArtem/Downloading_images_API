@@ -7,21 +7,7 @@ from urllib.parse import urlparse
 from dotenv import load_dotenv
 from general_functions import * 
 from dload_img_by_url import * 
-
-
-def fetch_spacex_last_launch(script_path, im_path):
-    create_dir(script_path,im_path)
-    url_template = "https://api.spacexdata.com/v5/launches/5eb87d47ffd86e000604b38a"
-    response = requests.get(url_template)
-    response.raise_for_status
-    img_links = response.json()
-    for img_number, img_link in enumerate(img_links["links"]["flickr"]["original"]):
-        image_request = requests.get(img_link)
-        image_request.raise_for_status
-        image_name = f"spacex_{img_number}.jpg"
-        with open(f"{script_path}/{im_path}/{image_name}", "wb") as saved_img:
-            saved_img.write(image_request.content)
-    return
+from spacex_launch import *
 
 
 def parse_nasa(access_token, script_path, im_path):
@@ -80,12 +66,12 @@ def main():
     load_dotenv()
     nasa_api_token = os.environ["api_key"]
     script_path = pathlib.Path.cwd()
-    url = input("Введите ссылку для скачивания: ")
+    # url = input("Введите ссылку для скачивания: ")
     im_path = input("Введите название директории, куда необходимо скачать файл: ")
-    download_img(url, script_path, im_path)
-    fetch_spacex_last_launch(script_path, im_path)
+    # download_img(url, script_path, im_path)
+    # fetch_spacex_last_launch(script_path, im_path)
     parse_EPIC(nasa_api_token, script_path, im_path)
-    parse_nasa(nasa_api_token, script_path, im_path)
+    # parse_nasa(nasa_api_token, script_path, im_path)
 
 
 if __name__ == "__main__":
