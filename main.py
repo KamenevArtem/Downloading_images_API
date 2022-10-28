@@ -4,16 +4,8 @@ import os
 import urllib.parse
 import datetime
 from urllib.parse import urlparse
-from pathlib import Path
 from dotenv import load_dotenv
-
-
-def create_dir(script_path, im_path):
-    try:
-        Path(f"{script_path}/{im_path}").mkdir(exist_ok=True)
-    except FileExistsError:
-        pass
-    return    
+from general_functions import *  
 
 
 def parse_im(url, script_path, im_path):
@@ -39,14 +31,6 @@ def fetch_spacex_last_launch(script_path, im_path):
         with open(f"{script_path}/{im_path}/{image_name}", "wb") as saved_img:
             saved_img.write(image_request.content)
     return
-  
-  
-def define_extension(file_url):
-    parsed_url = urlparse(file_url)
-    resulting_path = parsed_url.path
-    resulting_path = urllib.parse.unquote(resulting_path)
-    (file_path, file_extension) = os.path.splitext(resulting_path)
-    return file_extension
 
 
 def parse_nasa(access_token, script_path, im_path):
