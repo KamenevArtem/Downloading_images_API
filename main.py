@@ -7,7 +7,7 @@ from urllib.parse import urlparse
 from dotenv import load_dotenv
 from general_functions import * 
 from dload_img_by_url import * 
-from spacex_launch import *
+from dload_spacex_launch_img import *
 
 
 def parse_nasa(access_token, script_path, im_path):
