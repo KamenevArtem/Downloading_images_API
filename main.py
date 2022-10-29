@@ -1,9 +1,5 @@
-import requests
 import pathlib
 import os
-import urllib.parse
-import datetime
-from urllib.parse import urlparse
 from dotenv import load_dotenv
 from general_functions import * 
 from dload_img_by_url import * 
