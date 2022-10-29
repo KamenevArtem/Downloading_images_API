@@ -15,8 +15,8 @@ def parse_nasa(access_token, script_path, im_path):
     pics_data = response.json()
     for pic_number, pic_data in enumerate(pics_data):
         nasa_link = pic_data["url"]
-        link_condition = urlparse(nasa_link).netloc
-        if link_condition == "apod.nasa.gov":
+        link_netloc = urlparse(nasa_link).netloc
+        if link_netloc == "apod.nasa.gov":
             image_request = requests.get(nasa_link)
             image_request.raise_for_status
             pic_extension = define_extension(nasa_link)
