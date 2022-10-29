@@ -8,31 +8,7 @@ from dotenv import load_dotenv
 from general_functions import * 
 from dload_img_by_url import * 
 from dload_spacex_launch_img import *
-
-
-def parse_nasa(access_token, script_path, im_path):
-    create_dir(script_path, im_path)
-    api_url = "https://api.nasa.gov/planetary/apod"
-    payload = {
-        "api_key": {access_token},
-        "start_date": "2022-09-10",
-        "end_date": "2022-10-25",
-    }
-    response = requests.get(api_url, params=payload)
-    response.raise_for_status
-    pics_data = response.json()
-    for pic_number, pic_data in enumerate(pics_data):
-        nasa_link = pic_data["url"]
-        link_condition = urlparse(nasa_link).netloc
-        if link_condition == "apod.nasa.gov":
-            image_request = requests.get(nasa_link)
-            image_request.raise_for_status
-            pic_extension = define_extension(nasa_link)
-            image_name = f"APOD_{pic_number}{pic_extension}"
-            with open(f"{script_path}/{im_path}/{image_name}", "wb") as saved_img:
-                saved_img.write(image_request.content)
-        else:
-            pass
+from dload_nasa_lauch_img import *
 
 
 def parse_EPIC(access_token, script_path, im_path):
@@ -66,12 +42,12 @@ def main():
     load_dotenv()
     nasa_api_token = os.environ["api_key"]
     script_path = pathlib.Path.cwd()
-    # url = input("Введите ссылку для скачивания: ")
+    url = input("Введите ссылку для скачивания: ")
     im_path = input("Введите название директории, куда необходимо скачать файл: ")
-    # download_img(url, script_path, im_path)
-    # fetch_spacex_last_launch(script_path, im_path)
+    download_img(url, script_path, im_path)
+    fetch_spacex_last_launch(script_path, im_path)
     parse_EPIC(nasa_api_token, script_path, im_path)
-    # parse_nasa(nasa_api_token, script_path, im_path)
+    parse_nasa(nasa_api_token, script_path, im_path)
 
 
 if __name__ == "__main__":
