@@ -1,5 +1,6 @@
 import os
 import urllib.parse
+import argparse
 from urllib.parse import urlparse
 from pathlib import Path
 
@@ -18,3 +19,11 @@ def define_extension(file_url):
     resulting_path = urllib.parse.unquote(resulting_path)
     (file_path, file_extension) = os.path.splitext(resulting_path)
     return file_extension
+
+
+def parse_arg():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-m', '--module', nargs='?', help='Enter which module you want to use')
+    parser.add_argument('-u', '--url', nargs='?', help='Url for downloading image')
+    arg = parser.parse_args()
+    return arg    

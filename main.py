@@ -1,23 +1,41 @@
 import pathlib
-import os
 from dotenv import load_dotenv
 from general_functions import * 
 from dload_img_by_url import * 
 from dload_spacex_launch_img import *
 from dload_nasa_lauch_img import *
-from dload_EPIC_img_from_nasa import *    
+from dload_EPIC_img_from_nasa import *
 
 
 def main():
     load_dotenv()
+    args = parse_arg()
+    using_module = args.module
+    input_url = args.url
     nasa_api_token = os.environ["api_key"]
     script_path = pathlib.Path.cwd()
-    url = input("Введите ссылку для скачивания: ")
     im_path = input("Введите название директории, куда необходимо скачать файл: ")
-    download_img(url, script_path, im_path)
-    fetch_spacex_last_launch(script_path, im_path)
-    parse_EPIC(nasa_api_token, script_path, im_path)
-    parse_nasa(nasa_api_token, script_path, im_path)
+    if using_module == "Epic":
+        parse_EPIC(nasa_api_token, script_path, im_path)
+    if using_module == "Img":
+        if input_url is None:
+            download_img("https://upload.wikimedia.org/wikipedia/commons/3/3f/HST-SM4.jpeg"
+                         , script_path, im_path)
+        else:
+            download_img(input_url, script_path, im_path)
+    if using_module == "Nasa":
+        parse_nasa(nasa_api_token, script_path, im_path)
+    if using_module == "Launch":
+        fetch_spacex_last_launch(script_path, im_path)
+    if using_module is None:
+        if input_url is None:
+            download_img("https://upload.wikimedia.org/wikipedia/commons/3/3f/HST-SM4.jpeg"
+                         , script_path, im_path)
+        else:
+            download_img(input_url, script_path, im_path)
+        fetch_spacex_last_launch(script_path, im_path)
+        parse_EPIC(nasa_api_token, script_path, im_path)
+        parse_nasa(nasa_api_token, script_path, im_path)
 
 
 if __name__ == "__main__":

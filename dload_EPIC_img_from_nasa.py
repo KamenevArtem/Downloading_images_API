@@ -14,16 +14,24 @@ def parse_EPIC(access_token, script_path, im_path):
     response.raise_for_status
     response = response.json()
     for pic_number, img_data in enumerate(response):
-        pic_date = img_data["identifier"]
-        mean_index = int(len(pic_date)/2)+1
-        pic_date_template = pic_date[: mean_index]
-        pic_date_template = f"{pic_date[0:4]}-{pic_date[4:6]}-{pic_date[6:8]}"
-        pic_date = datetime.date.fromisoformat(pic_date_template)
+        pic_date = datetime.datetime.fromisoformat(img_data["date"])
         pic_name = img_data["image"]
-        link_construction = f"{pic_date.year}/{pic_date.month}/{pic_date.day}/png/{pic_name}.png"
+        if pic_date.month < 10:
+            if pic_date.day < 10:
+                link_construction = f"{pic_date.year}/0{pic_date.month}/0{pic_date.day}/png/{pic_name}.png"
+            else:
+                link_construction = f"{pic_date.year}/0{pic_date.month}/{pic_date.day}/png/{pic_name}.png"
+        else:
+            if pic_date.day < 10:
+                link_construction = f"{pic_date.year}/{pic_date.month}/0{pic_date.day}/png/{pic_name}.png"
+            else:
+                link_construction = f"{pic_date.year}/{pic_date.month}/{pic_date.day}/png/{pic_name}.png"
         url = url_template.format(link_construction)
+        print(url)
         image_request = requests.get(url, params=payload)
         image_request.raise_for_status
         image_name = f"EPIC_{pic_number}.png"
         with open(f"{script_path}/{im_path}/{image_name}", "wb") as saved_img:
-            saved_img.write(image_request.content) 
+            saved_img.write(image_request.content)
+
+
