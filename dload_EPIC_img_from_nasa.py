@@ -33,5 +33,3 @@ def parse_EPIC(access_token, script_path, im_path):
         image_name = f"EPIC_{pic_number}.png"
         with open(f"{script_path}/{im_path}/{image_name}", "wb") as saved_img:
             saved_img.write(image_request.content)
-
-
