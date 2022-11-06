@@ -21,11 +21,18 @@ def define_extension(file_url):
     return file_extension
 
 
-def parse_arg():
+def parse_arg_main():
     parser = argparse.ArgumentParser()
     parser.add_argument('-m', '--module', nargs='?', help='Enter which module you want to use')
     parser.add_argument('-u', '--url', nargs='?', help='Url for downloading image')
     parser.add_argument('-f', '--flight', nargs='?', help='Flight id for Nasa launch',
                         default="5eb87d47ffd86e000604b38a")
     arg = parser.parse_args()
-    return arg    
+    return arg
+
+
+def parse_arg_bot():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-iq', '--img_quantity', help='Quantity of images user need to post')
+    arg = parser.parse_args()
+    return arg

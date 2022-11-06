@@ -9,7 +9,7 @@ from dload_EPIC_img_from_nasa import *
 
 def main():
     load_dotenv()
-    args = parse_arg()
+    args = parse_arg_main()
     using_module = args.module
     input_url = args.url
     flight_id = args.flight

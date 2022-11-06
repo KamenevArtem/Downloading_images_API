@@ -9,7 +9,7 @@ def bot(api_token, script_path):
     bot = telegram.Bot(token = api_token)
     bot_chat_id = bot.get_updates()[-1].message.chat_id
     bot.send_message(text='Hi devman', chat_id=bot_chat_id)
-    bot.send_document(chat_id=bot_chat_id, document=open(f'{script_path}/1.png', 'rb'))
+    bot.send_document(chat_id=bot_chat_id, document=open(f'{script_path}/1.png', 'rb'))     
 
 
 def main():
@@ -20,5 +20,6 @@ def main():
 
 
 if __name__ == "__main__":
+    args = parse_arg_bot()
     main()
     
