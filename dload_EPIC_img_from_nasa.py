@@ -27,7 +27,6 @@ def parse_EPIC(access_token, script_path, im_path):
             else:
                 link_construction = f"{pic_date.year}/{pic_date.month}/{pic_date.day}/png/{pic_name}.png"
         url = url_template.format(link_construction)
-        print(url)
         image_request = requests.get(url, params=payload)
         image_request.raise_for_status
         image_name = f"EPIC_{pic_number}.png"

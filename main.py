@@ -13,9 +13,9 @@ def main():
     using_module = args.module
     input_url = args.url
     flight_id = args.flight
+    im_path = args.directory
     nasa_api_token = os.environ["api_key"]
     script_path = pathlib.Path.cwd()
-    im_path = input("Введите название директории, куда необходимо скачать файл: ")
     if using_module == "Epic":
         parse_EPIC(nasa_api_token, script_path, im_path)
     if using_module == "Img":

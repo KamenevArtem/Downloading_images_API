@@ -42,4 +42,3 @@ def main():
 if __name__ == "__main__":
     args = parse_arg_bot()
     main()
-    
