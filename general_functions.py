@@ -33,6 +33,9 @@ def parse_arg_main():
 
 def parse_arg_bot():
     parser = argparse.ArgumentParser()
-    parser.add_argument('-iq', '--img_quantity', help='Quantity of images user need to post')
+    parser.add_argument('-iq', '--img_quantity', nargs='?', help='Quantity of images user need to post')
+    parser.add_argument('-st', '--sleep_time', nargs='?', help='Publication frequency in hours',
+                        default = "10")
+    parser.add_argument('-d', '--directory', help='Directory where needed to be post images are located')
     arg = parser.parse_args()
     return arg
