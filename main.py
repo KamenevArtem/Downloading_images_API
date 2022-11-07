@@ -3,7 +3,7 @@ from dotenv import load_dotenv
 from general_functions import * 
 from dload_img_by_url import * 
 from dload_spacex_launch_img import *
-from dload_nasa_lauch_img import *
+from dload_nasa_img import *
 from dload_EPIC_img_from_nasa import *
 
 
