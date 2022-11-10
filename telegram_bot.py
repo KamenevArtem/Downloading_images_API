@@ -7,24 +7,29 @@ from dotenv import load_dotenv
 from general_functions import parse_arg_bot
 
 
-def bot(api_token, script_path, img_quantity, sleep_time, file_dir):
-    bot = telegram.Bot(token = api_token)
+def get_files_name(path, dir):
     files_name = [] 
-    for adress, dirs, files in os.walk(f'{script_path}/{file_dir}'):
+    for adress, dirs, files in os.walk(f'{path}/{dir}'):
         for name in files:
             files_name.append(name)
-    random.shuffle(files_name)
+    return files_name
+
+
+def bot(api_token, script_path, img_quantity, sleep_time, file_dir):
+    bot = telegram.Bot(token = api_token)
+    files_name = get_files_name(script_path, file_dir)
     quantity = 0
     while True:
         random.shuffle(files_name)
         for file_name in files_name:
-            if quantity >= int(img_quantity):
-                break
-            quantity += 1
-            time.sleep(int(sleep_time)*3600)
-            with open(f'{script_path}/{file_dir}/{file_name}', 'rb') as posting_file:
-                bot.send_document(chat_id=bot.get_updates()[-1].message.chat_id, 
-                                  document=posting_file)
+            if quantity < int(img_quantity):
+                quantity += 1
+                time.sleep(int(sleep_time))
+                with open(f'{script_path}/{file_dir}/{file_name}', 'rb') as posting_file:
+                    bot.send_document(chat_id=bot.get_updates()[-1].message.chat_id, 
+                                    document=posting_file)
+            else:
+                return
 
 
 def main():
