@@ -2,10 +2,10 @@ import requests
 from general_functions import create_dir
 from general_functions import urlparse
 from general_functions import define_extension
+from general_functions import saving_img
 
 
 def parse_nasa(access_token, script_path, im_path):
-    create_dir(script_path, im_path)
     api_url = "https://api.nasa.gov/planetary/apod"
     payload = {
         "api_key": {access_token},
@@ -19,11 +19,9 @@ def parse_nasa(access_token, script_path, im_path):
         nasa_link = pic_data["url"]
         link_netloc = urlparse(nasa_link).netloc
         if link_netloc == "apod.nasa.gov":
-            image_request = requests.get(nasa_link)
-            image_request.raise_for_status
-            pic_extension = define_extension(nasa_link)
-            image_name = f"APOD_{pic_number}{pic_extension}"
-            with open(f"{script_path}/{im_path}/{image_name}", "wb") as saved_img:
-                saved_img.write(image_request.content)
+            pic_extention = define_extension(nasa_link)
+            img_name = f"APOD_{pic_number}"
+            req_par = ""
+            saving_img(pic_extention, nasa_link, script_path, im_path, img_name, req_par)
         else:
             pass

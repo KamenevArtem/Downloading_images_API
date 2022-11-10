@@ -1,10 +1,11 @@
 import datetime
+import imp
 import requests
 from general_functions import create_dir
+from general_functions import saving_img
 
 
 def parse_EPIC(access_token, script_path, im_path):
-    create_dir(script_path, im_path)
     api_url = "https://api.nasa.gov/EPIC/api/natural/image"
     url_template = "https://api.nasa.gov/EPIC/archive/natural/{}"
     payload = {
@@ -27,8 +28,7 @@ def parse_EPIC(access_token, script_path, im_path):
             else:
                 link_construction = f"{pic_date.year}/{pic_date.month}/{pic_date.day}/png/{pic_name}.png"
         url = url_template.format(link_construction)
-        image_request = requests.get(url, params=payload)
-        image_request.raise_for_status()
-        image_name = f"EPIC_{pic_number}.png"
-        with open(f"{script_path}/{im_path}/{image_name}", "wb") as saved_img:
-            saved_img.write(image_request.content)
+        pic_extention = ".png"
+        img_name = f"EPIC_{pic_number}"
+        req_par = payload
+        saving_img(pic_extention, url, script_path, im_path, img_name, req_par)
