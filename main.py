@@ -21,10 +21,6 @@ def main():
         parse_nasa(nasa_api_token, script_path, im_path)
     if using_module == "Spacex":
         fetch_spacex_last_launch(script_path, im_path, flight_id)
-    if using_module is None:
-        fetch_spacex_last_launch(script_path, im_path, flight_id)
-        parse_EPIC(nasa_api_token, script_path, im_path)
-        parse_nasa(nasa_api_token, script_path, im_path)
 
 
 if __name__ == "__main__":

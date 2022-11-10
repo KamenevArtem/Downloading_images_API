@@ -1,7 +1,6 @@
 import datetime
 import imp
 import requests
-from general_functions import create_dir
 from general_functions import saving_img
 
 

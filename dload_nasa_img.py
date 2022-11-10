@@ -1,5 +1,4 @@
 import requests
-from general_functions import create_dir
 from general_functions import urlparse
 from general_functions import define_extension
 from general_functions import saving_img
