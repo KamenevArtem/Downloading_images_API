@@ -1,5 +1,5 @@
 import requests
-from general_functions import *
+from general_functions import create_dir
 
 
 def download_img(url, script_path, im_path):

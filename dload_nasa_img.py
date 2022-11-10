@@ -1,5 +1,7 @@
 import requests
-from general_functions import *
+from general_functions import create_dir
+from general_functions import urlparse
+from general_functions import define_extension
 
 
 def parse_nasa(access_token, script_path, im_path):

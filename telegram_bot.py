@@ -4,7 +4,7 @@ import pathlib
 import random
 import time
 from dotenv import load_dotenv
-from general_functions import *
+from general_functions import parse_arg_bot
 
 
 def bot(api_token, script_path, img_quantity, sleep_time, file_dir):
@@ -35,7 +35,7 @@ def main():
     sleep_time = args.sleep_time
     file_dir = args.directory
     script_path = pathlib.Path.cwd()
-    access_token = os.environ["telegram_api_key"]
+    access_token = os.environ["TG_API_KEY"]
     bot(access_token, script_path, img_quantity, sleep_time, file_dir) 
 
 

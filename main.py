@@ -1,10 +1,11 @@
 import pathlib
+import os
 from dotenv import load_dotenv
-from general_functions import * 
-from dload_img_by_url import * 
-from dload_spacex_launch_img import *
-from dload_nasa_img import *
-from dload_EPIC_img_from_nasa import *
+from general_functions import parse_arg_main
+from dload_img_by_url import download_img
+from dload_spacex_launch_img import fetch_spacex_last_launch
+from dload_nasa_img import parse_nasa
+from dload_EPIC_img_from_nasa import parse_EPIC
 
 
 def main():
@@ -14,7 +15,7 @@ def main():
     input_url = args.url
     flight_id = args.flight
     im_path = args.directory
-    nasa_api_token = os.environ["api_key"]
+    nasa_api_token = os.environ["NASA_API_KEY"]
     script_path = pathlib.Path.cwd()
     if using_module == "Epic":
         parse_EPIC(nasa_api_token, script_path, im_path)
