@@ -5,7 +5,7 @@ from general_functions import create_dir
 
 def parse_EPIC(access_token, script_path, im_path):
     create_dir(script_path, im_path)
-    api_url = "https://api1.nasa.gov/EPIC/api/natural/image"
+    api_url = "https://api.nasa.gov/EPIC/api/natural/image"
     url_template = "https://api.nasa.gov/EPIC/archive/natural/{}"
     payload = {
         "api_key": {access_token},

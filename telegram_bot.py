@@ -19,13 +19,12 @@ def bot(api_token, script_path, img_quantity, sleep_time, file_dir):
         random.shuffle(files_name)
         for file_name in files_name:
             if quantity >= int(img_quantity):
-                print("All images have been posted")
                 break
             quantity += 1
             time.sleep(int(sleep_time)*3600)
-            bot.send_document(chat_id=bot.get_updates()[-1].message.chat_id,
-                              document=open(f'{script_path}/{file_dir}/{file_name}', 'rb'))
-            print(quantity)
+            with open(f'{script_path}/{file_dir}/{file_name}', 'rb') as posting_file:
+                bot.send_document(chat_id=bot.get_updates()[-1].message.chat_id, 
+                                  document=posting_file)
 
 
 def main():
