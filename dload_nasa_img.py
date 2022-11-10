@@ -1,5 +1,4 @@
 import requests
-from general_functions import urlparse
 from general_functions import define_extension
 from general_functions import saving_img
 
@@ -16,8 +15,8 @@ def parse_nasa(access_token, script_path, im_path):
     pics_data = response.json()
     for pic_number, pic_data in enumerate(pics_data):
         nasa_link = pic_data["url"]
-        link_netloc = urlparse(nasa_link).netloc
-        if link_netloc == "apod.nasa.gov":
+        nasa_media_type = pic_data["media_type"]
+        if nasa_media_type == "image":
             pic_extention = define_extension(nasa_link)
             img_name = f"APOD_{pic_number}"
             req_par = ""
