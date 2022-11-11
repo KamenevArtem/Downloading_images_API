@@ -46,9 +46,12 @@ def parse_arg_bot():
 
 def saving_img(pic_extension, link, script_path, im_path, pic_name, req_par):
     create_dir(script_path, im_path)
-    image_request = requests.get(link, params = req_par)
-    image_request.raise_for_status
-    image_name = f"{pic_name}{pic_extension}"
-    with open(os.path.join(script_path, im_path, image_name), "wb") as saved_img:
-        saved_img.write(image_request.content)
-    return
+    try:
+        image_request = requests.get(link, params = req_par)
+        image_request.raise_for_status
+        image_name = f"{pic_name}{pic_extension}"
+        with open(os.path.join(script_path, im_path, image_name), "wb") as saved_img:
+            saved_img.write(image_request.content)
+        return
+    except requests.exceptions.HTTPError as err:
+        raise SyntaxError(err)
