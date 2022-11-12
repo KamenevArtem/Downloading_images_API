@@ -8,7 +8,7 @@ def fetch_spacex_last_launch(script_path, im_path, flight_id):
     url = url_template.format(flight_id)  
     try:
         response = requests.get(url)
-        response.raise_for_status
+        response.raise_for_status()
         img_links = response.json()
         for img_number, img_link in enumerate(img_links["links"]["flickr"]["original"]):
             pic_extention = ".jpg"

@@ -12,7 +12,7 @@ def parse_nasa(access_token, script_path, im_path):
     }
     try:
         response = requests.get(api_url, params=payload)
-        response.raise_for_status
+        response.raise_for_status()
         pics_data = response.json()
         for pic_number, pic_data in enumerate(pics_data):
             nasa_link = pic_data["url"]
