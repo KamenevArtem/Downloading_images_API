@@ -1,4 +1,3 @@
-import re
 import requests
 from general_functions import saving_img
 
