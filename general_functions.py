@@ -10,8 +10,7 @@ def create_dir(script_path, im_path):
     try:
         Path(os.path.join(script_path, im_path)).mkdir(exist_ok=True)
     except FileExistsError:
-        pass
-    return    
+        pass 
 
 
 def define_extension(file_url):
@@ -35,7 +34,6 @@ def parse_arg_main():
 
 def parse_arg_bot():
     parser = argparse.ArgumentParser()
-    parser.add_argument('-iq', '--img_quantity', nargs='?', help='Quantity of images user need to post')
     parser.add_argument('-st', '--sleep_time', nargs='?', help='Publication frequency in hours',
                         default = "10")
     parser.add_argument('-d', '--directory', help='Directory where needed to be post images are located',
@@ -52,6 +50,5 @@ def saving_img(pic_extension, link, script_path, im_path, pic_name, req_par):
         image_name = f"{pic_name}{pic_extension}"
         with open(os.path.join(script_path, im_path, image_name), "wb") as saved_img:
             saved_img.write(image_request.content)
-        return
     except requests.exceptions.HTTPError as err:
         raise SyntaxError(err)

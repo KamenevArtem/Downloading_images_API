@@ -22,7 +22,5 @@ def parse_nasa(access_token, script_path, im_path):
                 img_name = f"APOD_{pic_number}"
                 req_par = ""
                 saving_img(pic_extention, nasa_link, script_path, im_path, img_name, req_par)
-            else:
-                pass
     except requests.exceptions.HTTPError as err:
         raise SystemExit(err)
