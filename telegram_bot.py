@@ -21,7 +21,7 @@ def send_images(api_token, script_path, sleep_time, file_dir):
     while True:
         random.shuffle(files_name)
         for file_name in files_name:
-            time.sleep(int(sleep_time))
+            time.sleep(int(sleep_time)*3600)
             with open(os.path.join(script_path, file_dir, file_name), 'rb') as posting_file:
                 bot.send_document(chat_id=bot.get_updates()[-1].message.chat_id, 
                                 document=posting_file)
