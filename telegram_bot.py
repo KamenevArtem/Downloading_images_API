@@ -9,7 +9,7 @@ from general_functions import parse_arg_bot
 
 def get_files_name(path, dir):
     files_name = [] 
-    for adress, dirs, files in os.walk(f'{path}/{dir}'):
+    for adress, dirs, files in os.walk(os.path.join(path, dir)):
         for name in files:
             files_name.append(name)
     return files_name
@@ -22,7 +22,7 @@ def bot(api_token, script_path, sleep_time, file_dir):
         random.shuffle(files_name)
         for file_name in files_name:
             time.sleep(int(sleep_time))
-            with open(f'{script_path}/{file_dir}/{file_name}', 'rb') as posting_file:
+            with open(os.path.join(script_path, file_dir, file_name), 'rb') as posting_file:
                 bot.send_document(chat_id=bot.get_updates()[-1].message.chat_id, 
                                 document=posting_file)
 
