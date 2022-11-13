@@ -15,7 +15,7 @@ def get_files_name(path, dir):
     return files_name
 
 
-def bot(api_token, script_path, sleep_time, file_dir):
+def send_images(api_token, script_path, sleep_time, file_dir):
     bot = telegram.Bot(token = api_token)
     files_name = get_files_name(script_path, file_dir)
     while True:
@@ -34,7 +34,7 @@ def main():
     file_dir = args.directory
     script_path = pathlib.Path.cwd()
     access_token = os.environ["TG_API_KEY"]
-    bot(access_token, script_path, sleep_time, file_dir) 
+    send_images(access_token, script_path, sleep_time, file_dir) 
 
 
 if __name__ == "__main__":
