@@ -14,7 +14,7 @@ def define_extension(file_url):
     parsed_url = urlparse(file_url)
     resulting_path = parsed_url.path
     resulting_path = urllib.parse.unquote(resulting_path)
-    (file_path, file_extension) = os.path.splitext(resulting_path)
+    file_path, file_extension = os.path.splitext(resulting_path)
     return file_extension
 
 
