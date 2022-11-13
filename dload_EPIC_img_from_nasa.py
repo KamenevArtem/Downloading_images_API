@@ -3,7 +3,7 @@ import requests
 from general_functions import saving_img
 
 
-def parse_EPIC(access_token, script_path, im_path):
+def parse_epic(access_token, script_path, im_path):
     api_url = "https://api.nasa.gov/EPIC/api/natural/image"
     url_template = "https://api.nasa.gov/EPIC/archive/natural/{}"
     payload = {
