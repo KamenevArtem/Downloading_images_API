@@ -7,17 +7,17 @@ from dotenv import load_dotenv
 from general_functions import parse_arg_bot
 
 
-def get_files_name(path, dir):
-    files_name = [] 
+def get_file_names(path, dir):
+    file_names = [] 
     for adress, dirs, files in os.walk(os.path.join(path, dir)):
         for name in files:
-            files_name.append(name)
-    return files_name
+            file_names.append(name)
+    return file_names
 
 
 def send_images(api_token, script_path, sleep_time, file_dir):
     bot = telegram.Bot(token = api_token)
-    files_name = get_files_name(script_path, file_dir)
+    files_name = get_file_names(script_path, file_dir)
     while True:
         random.shuffle(files_name)
         for file_name in files_name:
