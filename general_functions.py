@@ -7,10 +7,7 @@ from pathlib import Path
 
 
 def create_dir(script_path, im_path):
-    try:
-        Path(os.path.join(script_path, im_path)).mkdir(exist_ok=True)
-    except FileExistsError:
-        pass 
+    Path(os.path.join(script_path, im_path)).mkdir(exist_ok=True) 
 
 
 def define_extension(file_url):
@@ -51,4 +48,4 @@ def saving_img(pic_extension, link, script_path, im_path, pic_name, req_par):
         with open(os.path.join(script_path, im_path, image_name), "wb") as saved_img:
             saved_img.write(image_request.content)
     except requests.exceptions.HTTPError as err:
-        raise SyntaxError(err)
+        print("Была введена неправильная ссылка.")

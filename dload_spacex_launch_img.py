@@ -16,4 +16,4 @@ def fetch_spacex_last_launch(script_path, im_path, flight_id):
             saving_img(pic_extention, img_link, script_path, im_path, img_name, req_par)
         return
     except requests.exceptions.HTTPError as err:
-        raise SystemExit(err)
+        print("Была введена неправильная ссылка.")
