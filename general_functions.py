@@ -20,10 +20,9 @@ def define_extension(file_url):
 
 def parse_arg_main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('-m', '--module', nargs='?', help='Enter which module you want to use')
     parser.add_argument('-f', '--flight', nargs='?', help='Flight id for Nasa launch',
                         default="5eb87d47ffd86e000604b38a")
-    parser.add_argument('-d','--directory', help='Directory where images should be downloaded',
+    parser.add_argument('-d','--directory', nargs='?', help='Directory where images should be downloaded',
                         default = 'Images')
     arg = parser.parse_args()
     return arg

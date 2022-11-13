@@ -1,4 +1,7 @@
 import requests
+import pathlib
+from dotenv import load_dotenv
+from general_functions import parse_arg_main
 from general_functions import saving_img
 
 
@@ -15,5 +18,18 @@ def fetch_spacex_last_launch(script_path, im_path, flight_id):
             req_par = ""
             saving_img(pic_extention, img_link, script_path, im_path, img_name, req_par)
         return
-    except requests.exceptions.HTTPError as err:
+    except requests.exceptions.HTTPError:
         print("Была введена неправильная ссылка.")
+        
+
+def main():
+    script_path = pathlib.Path.cwd()
+    load_dotenv()
+    args = parse_arg_main()
+    im_path = args.directory
+    flight_id = args.flight
+    fetch_spacex_last_launch(script_path, im_path, flight_id)
+    
+    
+if __name__ == "__main__":
+    main()

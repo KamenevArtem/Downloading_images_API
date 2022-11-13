@@ -1,4 +1,8 @@
 import requests
+import pathlib
+import os
+from dotenv import load_dotenv
+from general_functions import parse_arg_main
 from general_functions import define_extension
 from general_functions import saving_img
 
@@ -22,5 +26,17 @@ def parse_nasa(access_token, script_path, im_path):
                 img_name = f"APOD_{pic_number}"
                 req_par = ""
                 saving_img(pic_extention, nasa_link, script_path, im_path, img_name, req_par)
-    except requests.exceptions.HTTPError as err:
+    except requests.exceptions.HTTPError:
         print("Была введена неправильная ссылка или неверный токен.")
+        
+def main():
+    script_path = pathlib.Path.cwd()
+    load_dotenv()
+    access_token = os.environ["NASA_API_KEY"]
+    args = parse_arg_main()
+    im_path = args.directory
+    parse_nasa(access_token, script_path, im_path)
+    
+    
+if __name__ == "__main__":
+    main()
