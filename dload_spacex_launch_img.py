@@ -12,10 +12,10 @@ def fetch_spacex_last_launch(script_path, im_path, flight_id):
     response.raise_for_status()
     img_links = response.json()
     for img_number, img_link in enumerate(img_links["links"]["flickr"]["original"]):
-        pic_extention = ".jpg"
+        pic_extension = ".jpg"
         img_name = f"spacex_{img_number}"
         req_par = ""
-        saving_img(pic_extention, img_link, script_path, im_path, img_name, req_par)
+        saving_img(pic_extension, img_link, script_path, im_path, img_name, req_par)
     return
         
 

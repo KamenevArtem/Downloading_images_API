@@ -24,10 +24,10 @@ def parse_epic(access_token, script_path, im_path):
         pic_name = img_data["image"]
         link_construction = f"{year}/{month}/{day}/png/{pic_name}.png"
         url = url_template.format(link_construction)
-        pic_extention = ".png"
+        pic_extension = ".png"
         img_name = f"EPIC_{pic_number}"
         req_par = payload
-        saving_img(pic_extention, url, script_path, im_path, img_name, req_par)    
+        saving_img(pic_extension, url, script_path, im_path, img_name, req_par)    
 
 
 def main():
