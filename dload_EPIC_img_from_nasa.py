@@ -18,11 +18,8 @@ def parse_epic(access_token, script_path, im_path):
     response = response.json()
     for pic_number, img_data in enumerate(response):
         pic_date = datetime.datetime.fromisoformat(img_data["date"])
-        day = pic_date.strftime("%d")
-        month = pic_date.strftime("%m")
-        year = pic_date.strftime("%Y")
         pic_name = img_data["image"]
-        link_construction = f"{year}/{month}/{day}/png/{pic_name}.png"
+        link_construction = f"{pic_date.year}/{pic_date.month}/{pic_date.day}/png/{pic_name}.png"
         url = url_template.format(link_construction)
         pic_extension = ".png"
         img_name = f"EPIC_{pic_number}"
