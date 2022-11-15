@@ -28,16 +28,6 @@ def parse_arg_main():
     return arg
 
 
-def parse_arg_bot():
-    parser = argparse.ArgumentParser()
-    parser.add_argument('-st', '--sleep_time', nargs='?', help='Publication frequency in hours',
-                        default = "10")
-    parser.add_argument('-d', '--directory', help='Directory where needed to be post images are located',
-                        default='Images')
-    arg = parser.parse_args()
-    return arg
-
-
 def saving_img(pic_extension, link, script_path, im_path, pic_name, req_par):
     create_dir(script_path, im_path)
     image_request = requests.get(link, params = req_par)

@@ -3,8 +3,18 @@ import os
 import pathlib
 import random
 import time
+import argparse
 from dotenv import load_dotenv
-from general_functions import parse_arg_bot
+
+
+def parse_args_bot():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-st', '--sleep_time', nargs='?', help='Publication frequency in hours',
+                        default = "10")
+    parser.add_argument('-d', '--directory', help='Directory where needed to be post images are located',
+                        default='Images')
+    arg = parser.parse_args()
+    return arg
 
 
 def get_file_names(path, dir):
@@ -29,7 +39,7 @@ def send_images(api_token, script_path, sleep_time, file_dir):
 
 def main():
     load_dotenv()
-    args = parse_arg_bot()
+    args = parse_args_bot()
     sleep_time = args.sleep_time
     file_dir = args.directory
     script_path = pathlib.Path.cwd()
