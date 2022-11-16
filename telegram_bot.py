@@ -9,8 +9,8 @@ from dotenv import load_dotenv
 
 def parse_args_bot():
     parser = argparse.ArgumentParser()
-    parser.add_argument('-st', '--sleep_time', nargs='?', help='Publication frequency in hours',
-                        default = "10")
+    parser.add_argument('-st', '--sleep_time', nargs='?', type=float, help='Publication frequency in hours',
+                        default = "1")
     parser.add_argument('-d', '--directory', help='Directory where needed to be post images are located',
                         default='Images')
     arg = parser.parse_args()
@@ -31,7 +31,7 @@ def send_images(api_token, script_path, sleep_time, file_dir, tg_chat_id):
     while True:
         random.shuffle(files_name)
         for file_name in files_name:
-            time.sleep(int(sleep_time)*3600)
+            time.sleep(sleep_time*60)
             with open(os.path.join(script_path, file_dir, file_name), 'rb') as posting_file:
                 bot.send_document(chat_id=tg_chat_id, 
                                 document=posting_file)
