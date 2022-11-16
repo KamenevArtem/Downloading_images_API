@@ -45,7 +45,7 @@ def main():
     script_path = pathlib.Path.cwd()
     access_token = os.environ["TG_API_KEY"]
     chat_id = os.environ["TG_CHAT_ID"]
-    send_images(access_token, script_path, sleep_time, file_dir, chat_id) 
+    send_images(access_token, script_path, sleep_time, file_dir, chat_id)
 
 
 if __name__ == "__main__":
