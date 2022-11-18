@@ -6,10 +6,6 @@ from urllib.parse import urlparse
 from pathlib import Path
 
 
-def create_dir(script_path, im_path):
-    Path(os.path.join(script_path, im_path)).mkdir(exist_ok=True) 
-
-
 def define_extension(file_url):
     parsed_url = urlparse(file_url)
     resulting_path = parsed_url.path
@@ -29,7 +25,7 @@ def parse_arg_main():
 
 
 def saving_img(pic_extension, link, script_path, im_path, pic_name, req_params):
-    create_dir(script_path, im_path)
+    Path(os.path.join(script_path, im_path)).mkdir(exist_ok=True)
     image_request = requests.get(link, params = req_params)
     image_request.raise_for_status()
     image_name = f"{pic_name}{pic_extension}"
