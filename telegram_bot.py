@@ -4,6 +4,7 @@ import pathlib
 import random
 import time
 import argparse
+from telegram.error import NetworkError
 from dotenv import load_dotenv
 
 
@@ -34,11 +35,27 @@ def send_image(bot, file_path, tg_chat_id):
 def sending_images_bot(api_token, script_path, sleep_time, file_dir, tg_chat_id):
     bot = telegram.Bot(token = api_token)
     file_paths = get_file_paths(script_path, file_dir)
+    errors_number = 0
     while True:
-        random.shuffle(file_paths)
-        for file_path in file_paths:
-            send_image(bot, file_path, tg_chat_id)
-            time.sleep(sleep_time*60)
+        try:
+            random.shuffle(file_paths)
+            for file_path in file_paths:
+                send_image(bot, file_path, tg_chat_id)
+                time.sleep(sleep_time*60)
+        except telegram.error.NetworkError:
+            errors_number += 1
+            if errors_number == 1:
+                time.sleep(1)
+            else:
+                time.sleep(10)
+            pass
+        except ConnectionError:
+            errors_number += 1
+            if errors_number == 1:
+                time.sleep(1)
+            else:
+                time.sleep(10)
+            pass
 
 
 def main():
