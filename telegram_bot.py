@@ -4,7 +4,6 @@ import pathlib
 import random
 import time
 import argparse
-from telegram.error import NetworkError
 from dotenv import load_dotenv
 
 
