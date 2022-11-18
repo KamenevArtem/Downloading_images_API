@@ -17,9 +17,9 @@ def parse_args_bot():
     return arg
 
 
-def get_file_paths(path, dir):
+def get_file_paths(file_path, file_dir):
     file_paths = [] 
-    for adress, dirs, files in os.walk(os.path.join(path, dir)):
+    for adress, dir, files in os.walk(os.path.join(file_path, file_dir)):
         for name in files:
             file_paths.append(os.path.join(adress, name))
     return(file_paths)
