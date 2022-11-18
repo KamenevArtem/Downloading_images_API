@@ -18,9 +18,9 @@ def parse_nasa(access_token, script_path, im_path):
     response.raise_for_status()
     pics_data = response.json()
     for pic_number, pic_data in enumerate(pics_data):
-        nasa_link = pic_data["url"]
         nasa_media_type = pic_data["media_type"]
         if nasa_media_type == "image":
+            nasa_link = pic_data["url"]
             pic_extension = define_extension(nasa_link)
             img_name = f"APOD_{pic_number}"
             req_par = ""
