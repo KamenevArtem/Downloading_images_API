@@ -10,10 +10,10 @@ from general_functions import saving_img
 def parse_epic(access_token, script_path, im_path):
     api_url = "https://api.nasa.gov/EPIC/api/natural/image"
     url_template = "https://api.nasa.gov/EPIC/archive/natural/{}"
-    payload = {
+    api_param = {
         "api_key": {access_token},
     }
-    response = requests.get(api_url, params=payload)
+    response = requests.get(api_url, params=api_param)
     response.raise_for_status()
     response = response.json()
     for pic_number, img_data in enumerate(response):
@@ -23,8 +23,7 @@ def parse_epic(access_token, script_path, im_path):
         url = url_template.format(link_construction)
         pic_extension = ".png"
         img_name = f"EPIC_{pic_number}"
-        req_par = payload
-        saving_img(pic_extension, url, script_path, im_path, img_name, req_par)    
+        saving_img(pic_extension, url, script_path, im_path, img_name, api_param)    
 
 
 def main():

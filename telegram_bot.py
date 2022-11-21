@@ -47,14 +47,12 @@ def sending_images_bot(api_token, script_path, sleep_time, file_dir, tg_chat_id)
                 time.sleep(1)
             else:
                 time.sleep(10)
-            pass
         except ConnectionError:
             errors_number += 1
             if errors_number == 1:
                 time.sleep(1)
             else:
                 time.sleep(10)
-            pass
 
 
 def main():
