@@ -13,7 +13,7 @@ def parse_epic(access_token, script_path, im_path):
     api_param = {
         "api_key": {access_token},
     }
-    response = requests.get(api_url, params=api_param)
+    response = requests.get(api_url, api_param)
     response.raise_for_status()
     response = response.json()
     for pic_number, img_data in enumerate(response):

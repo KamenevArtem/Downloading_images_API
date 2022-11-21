@@ -8,9 +8,9 @@ from pathlib import Path
 
 def define_extension(file_url):
     parsed_url = urlparse(file_url)
-    resulting_path = parsed_url.path
-    resulting_path = urllib.parse.unquote(resulting_path)
-    file_path, file_extension = os.path.splitext(resulting_path)
+    parsed_path = parsed_url.path
+    parsed_path = urllib.parse.unquote(parsed_path)
+    file_path, file_extension = os.path.splitext(parsed_path)
     return file_extension
 
 
@@ -24,9 +24,9 @@ def parse_arg_main():
     return arg
 
 
-def saving_img(pic_extension, link, script_path, im_path, pic_name, req_params=""):
+def saving_img(pic_extension, link, script_path, im_path, pic_name, params=""):
     Path(os.path.join(script_path, im_path)).mkdir(exist_ok=True)
-    image_request = requests.get(link, params = req_params)
+    image_request = requests.get(link, params)
     image_request.raise_for_status()
     image_name = f"{pic_name}{pic_extension}"
     with open(os.path.join(script_path, im_path, image_name), "wb") as saved_img:
