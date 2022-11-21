@@ -24,7 +24,7 @@ def parse_arg_main():
     return arg
 
 
-def saving_img(pic_extension, link, script_path, im_path, pic_name, req_params):
+def saving_img(pic_extension, link, script_path, im_path, pic_name, req_params=""):
     Path(os.path.join(script_path, im_path)).mkdir(exist_ok=True)
     image_request = requests.get(link, params = req_params)
     image_request.raise_for_status()

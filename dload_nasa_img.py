@@ -23,8 +23,7 @@ def parse_nasa(access_token, script_path, im_path):
             nasa_link = pic_data["url"]
             pic_extension = define_extension(nasa_link)
             img_name = f"APOD_{pic_number}"
-            req_par = ""
-            saving_img(pic_extension, nasa_link, script_path, im_path, img_name, req_par)
+            saving_img(pic_extension, nasa_link, script_path, im_path, img_name)
 
         
 def main():
