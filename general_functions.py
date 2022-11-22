@@ -24,11 +24,9 @@ def parse_arg_main():
     return arg
 
 
-def saving_img(pic_extension, link, script_path, im_path, pic_name, params=""):
-    Path(os.path.join(script_path, im_path)).mkdir(exist_ok=True)
+def saving_img(link, im_path, params=""):
     image_request = requests.get(link, params)
     image_request.raise_for_status()
-    image_name = f"{pic_name}{pic_extension}"
-    with open(os.path.join(script_path, im_path, image_name), "wb") as saved_img:
+    with open(im_path, "wb") as saved_img:
         saved_img.write(image_request.content)
 

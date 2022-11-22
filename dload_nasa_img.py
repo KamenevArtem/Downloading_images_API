@@ -2,12 +2,13 @@ import requests
 import pathlib
 import os
 from dotenv import load_dotenv
+from pathlib import Path
 from general_functions import parse_arg_main
 from general_functions import define_extension
 from general_functions import saving_img
 
 
-def parse_nasa(access_token, script_path, im_path):
+def parse_nasa(access_token, file_dir):
     api_url = "https://api.nasa.gov/planetary/apod"
     payload = {
         "api_key": {access_token},
@@ -21,18 +22,22 @@ def parse_nasa(access_token, script_path, im_path):
         media_type = pic_data["media_type"]
         if media_type == "image":
             nasa_link = pic_data["url"]
+            file_path = file_dir
             pic_extension = define_extension(nasa_link)
-            img_name = f"APOD_{pic_number}"
-            saving_img(pic_extension, nasa_link, script_path, im_path, img_name)
+            img_name = f"APOD_{pic_number}.{pic_extension}"
+            file_path = Path(file_path).joinpath(img_name)
+            saving_img(nasa_link, file_path)
 
         
 def main():
-    script_path = pathlib.Path.cwd()
     load_dotenv()
     access_token = os.environ["NASA_API_KEY"]
     args = parse_arg_main()
-    im_path = args.directory
-    parse_nasa(access_token, script_path, im_path)
+    file_dir = args.directory
+    script_path = pathlib.Path.cwd()
+    file_path = script_path.joinpath(file_dir)
+    file_path.mkdir(exist_ok=True)
+    parse_nasa(access_token, file_path)
     
     
 if __name__ == "__main__":
