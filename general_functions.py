@@ -3,7 +3,6 @@ import urllib.parse
 import argparse
 import requests
 from urllib.parse import urlparse
-from pathlib import Path
 
 
 def define_extension(file_url):
