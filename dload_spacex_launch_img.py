@@ -13,9 +13,8 @@ def fetch_spacex_last_launch(file_dir, flight_id):
     response.raise_for_status()
     img_links = response.json()
     for img_number, img_link in enumerate(img_links["links"]["flickr"]["original"]):
-        file_path = file_dir
         img_name = f"spacex_{img_number}.jpg"
-        file_path = Path(file_path).joinpath(img_name)
+        file_path = Path(file_dir).joinpath(img_name)
         saving_img(img_link, file_path, img_name)
         
 

@@ -18,13 +18,12 @@ def parse_epic(access_token, file_dir):
     response.raise_for_status()
     response = response.json()
     for pic_number, img_data in enumerate(response):
-        file_path = file_dir
         pic_date = datetime.datetime.fromisoformat(img_data["date"])
         pic_name = img_data["image"]
-        link_construction = f"{pic_date:%Y}/{pic_date:%m}/{pic_date:%d}/png/{pic_name}.png"
+        link_construction = f"{pic_date:%Y/%m/%d}/png/{pic_name}.png"
         url = url_template.format(link_construction)
         img_name = f"EPIC_{pic_number}.png"
-        file_path = Path(file_path).joinpath(img_name)
+        file_path = Path(file_dir).joinpath(img_name)
         saving_img(url, file_path, api_param)    
 
 

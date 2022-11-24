@@ -22,10 +22,9 @@ def parse_nasa(access_token, file_dir):
         media_type = pic_data["media_type"]
         if media_type == "image":
             nasa_link = pic_data["url"]
-            file_path = file_dir
             pic_extension = define_extension(nasa_link)
             img_name = f"APOD_{pic_number}.{pic_extension}"
-            file_path = Path(file_path).joinpath(img_name)
+            file_path = Path(file_dir).joinpath(img_name)
             saving_img(nasa_link, file_path)
 
         
