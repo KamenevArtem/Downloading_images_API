@@ -34,7 +34,7 @@ def send_image(bot, file_path, tg_chat_id):
 
 
 @retry((telegram.error.NetworkError, ConnectionError), delay=1, backoff=4, max_delay=4)
-def sending_images_bot(api_token, file_path, sleep_time, tg_chat_id):
+def send_images_to_tg_channel(api_token, file_path, sleep_time, tg_chat_id):
     bot = telegram.Bot(token = api_token)
     file_paths = get_file_paths(file_path)
     while True:
@@ -53,7 +53,7 @@ def main():
     file_path = script_path.joinpath(file_dir)
     access_token = os.environ["TG_API_KEY"]
     chat_id = os.environ["TG_CHAT_ID"]
-    sending_images_bot(access_token, file_path, sleep_time, chat_id)
+    send_images_to_tg_channel(access_token, file_path, sleep_time, chat_id)
 
 
 if __name__ == "__main__":
