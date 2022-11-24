@@ -23,7 +23,7 @@ def parse_arg_main():
     return arg
 
 
-def saving_img(link, im_path, params=""):
+def saving_img(link, im_path, params=None):
     response = requests.get(link, params)
     response.raise_for_status()
     with open(im_path, "wb") as saved_img:
