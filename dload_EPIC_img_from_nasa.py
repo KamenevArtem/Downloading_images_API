@@ -24,7 +24,7 @@ def parse_epic(access_token, file_dir):
         url = url_template.format(link_construction)
         img_name = f"EPIC_{pic_number}.png"
         file_path = Path(file_dir).joinpath(img_name)
-        saving_img(url, file_path, api_param)    
+        saving_img(url, file_path, api_param)
 
 
 def main():
@@ -36,7 +36,7 @@ def main():
     file_path = script_path.joinpath(file_dir)
     file_path.mkdir(exist_ok=True)
     parse_epic(access_token, file_path)
-    
-    
+
+
 if __name__ == "__main__":
     main()

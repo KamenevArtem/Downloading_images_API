@@ -27,7 +27,7 @@ def parse_nasa(access_token, file_dir):
             file_path = Path(file_dir).joinpath(img_name)
             saving_img(nasa_link, file_path)
 
-        
+
 def main():
     load_dotenv()
     access_token = os.environ["NASA_API_KEY"]
@@ -37,7 +37,7 @@ def main():
     file_path = script_path.joinpath(file_dir)
     file_path.mkdir(exist_ok=True)
     parse_nasa(access_token, file_path)
-    
-    
+
+
 if __name__ == "__main__":
     main()
